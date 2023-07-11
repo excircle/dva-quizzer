@@ -14,17 +14,38 @@ import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { mainListItems } from "./listItems";
+import SideMenu from "./listItems";
 import { AppBar } from "./components/stylings/AppBar";
 import { Drawer } from "./components/stylings/Drawer";
-import Orders from "./components/Orders";
+import { useState } from "react";
 import Copyright from "./components/Copyright";
+import Homepage from "./components/modules/Homepage";
+import Questions from "./components/modules/Questions";
+import Quiz from "./components/modules/Quiz";
+import Compendium from "./components/modules/Compendium";
+import Chart from "./components/Chart";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 export default function Home() {
+  // useState
   const [open, setOpen] = React.useState(true);
+  const [module, setModule] = useState("Homepage");
+
+  function displayModule(mod) {
+    switch (mod) {
+      case "Questions":
+        return <Questions />;
+      case "Quiz":
+        return <Quiz />;
+      case "Compendium":
+        return <Compendium />;
+      default:
+        return <Homepage />;
+    }
+  }
+
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -82,7 +103,8 @@ export default function Home() {
           </Toolbar>
           <Divider />
           <List component="nav">
-            {mainListItems}
+            {/* =SIDE MENU= */}
+            <SideMenu setModule={setModule} />
             <Divider sx={{ my: 1 }} />
           </List>
         </Drawer>
@@ -101,10 +123,10 @@ export default function Home() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              {/* Recent Orders */}
+              {/* Main Stage */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                  <Orders />
+                  {displayModule(module)}
                 </Paper>
               </Grid>
             </Grid>
