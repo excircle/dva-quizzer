@@ -6,8 +6,9 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
+import { useForm, Controller } from "react-hook-form";
 
-const currencies = [
+const domains = [
   {
     value: "Domain 1: AWS Development",
     label: "Domain 1: AWS Development",
@@ -44,7 +45,7 @@ export default function Questions() {
             }}
             helperText="Please select your domain"
           >
-            {currencies.map((option) => (
+            {domains.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
               </option>
