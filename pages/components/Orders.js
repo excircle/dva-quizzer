@@ -14,8 +14,8 @@ function createData(id, date, domain, correct, possible) {
 
 const rows = [
   createData(0, "7/5/23", "AWS Development", 8, 10),
-  createData(0, "7/5/23", "AWS Development", 6, 10),
-  createData(0, "7/5/23", "AWS Security", 9, 10),
+  createData(1, "7/5/23", "AWS Development", 6, 10),
+  createData(2, "7/5/23", "AWS Security", 9, 10),
 ];
 
 function preventDefault(event) {
