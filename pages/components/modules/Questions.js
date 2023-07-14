@@ -7,26 +7,27 @@ import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import { useForm, Controller } from "react-hook-form";
+import { saveQuestion } from "@/pages/api/questionsApi";
 
 const domains = [
   {
     id: 1,
-    value: "Domain 1: AWS Development",
+    value: "1",
     label: "Domain 1: AWS Development",
   },
   {
     id: 2,
-    value: "Domain 2: AWS Security",
+    value: 2,
     label: "Domain 2: AWS Security",
   },
   {
     id: 3,
-    value: "Domain 3: AWS Deployment",
+    value: "3",
     label: "Domain 3: AWS Deployment",
   },
   {
     id: 4,
-    value: "Domain 4: AWS Troubleshooting",
+    value: "4",
     label: "Domain 4: AWS Troubleshooting",
   },
 ];
@@ -34,15 +35,17 @@ const domains = [
 export default function Questions() {
   const { register, handleSubmit, control } = useForm();
 
+  const onFormSubmit = async (data) => {
+    const res = await saveQuestion(data);
+  };
+  const onErrors = (errors) => console.error(errors);
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
         Questions Submit Form
       </Typography>
-      <form
-        noValidate
-        onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))}
-      >
+      <form noValidate onSubmit={handleSubmit(onFormSubmit, onErrors)}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <TextField
